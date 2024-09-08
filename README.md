@@ -15,7 +15,7 @@ This project have made for test case
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/eroltukenmez/news-board-app.git
 ```
 
 Go to the project directory
