@@ -1,0 +1,60 @@
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: news-board-nginx
+        ports:
+            - "${APP_PORT:-8001}:80"
+        volumes:
+            - ./Docker/nginx/conf.d:/etc/nginx/conf.d
+            - .:/var/www
+        depends_on:
+            - php
+        networks:
+            - news-network
+
+    php:
+        build:
+            context: .
+            dockerfile: Docker/Dockerfile
+        container_name: news-board-php
+        #environment:
+            #USER: ${DOCKER_USER:-test}
+            #GROUP: ${DOCKER_UID:-1000}
+        volumes:
+            - .:/var/www
+        networks:
+            - news-network
+
+    db:
+        image: postgres:latest
+        container_name: news-board-postgres
+        environment:
+            POSTGRES_USER: ${DB_USERNAME:-news_app}
+            POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+            POSTGRES_DB: ${DB_DATABASE:-news_app}
+        volumes:
+            - news-postgres-data:/var/lib/postgresql/data
+        networks:
+            - news-network
+
+    cache:
+        image: redis:latest
+        container_name: news-board-redis
+        restart: always
+        environment:
+            REDIS_PASSWORD: ${REDIS_PASSWORD}
+        ports:
+            - "6379:6379"
+        command: redis-server --save 20 1 --loglevel warning
+        volumes:
+            - cache:/data
+        networks:
+            - news-network
+
+networks:
+    news-network:
+        driver: bridge
+
+volumes:
+    news-postgres-data:
+    cache:
