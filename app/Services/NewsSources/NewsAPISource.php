@@ -16,15 +16,18 @@ class NewsAPISource implements NewsSourceInterface
             ->get('everything', $params);
 
         $news = [];
-        foreach ($response->json()['articles'] as $item) {
-            $news[] = new NewsItem(
-                title:$item['title'],
-                content: $item['content'],
-                image:$item['urlToImage'],
-                date: $item['publishedAt'],
-                categories: [],
-                tags: []
-            );
+        $data = $response->json();
+        if ($data['status'] != 'error'){
+            foreach ($data['articles'] as $item) {
+                $news[] = new NewsItem(
+                    title:$item['title'],
+                    content: $item['content'],
+                    image:$item['urlToImage'],
+                    date: $item['publishedAt'],
+                    categories: [],
+                    tags: []
+                );
+            }
         }
         return $news;
     }
