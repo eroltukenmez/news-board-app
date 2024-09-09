@@ -85,13 +85,13 @@ onMounted(() => {
             <div class="w-full py-3">
                 <h2 class="text-gray-800 dark:text-gray-200 text-2xl font-bold" >Latest news</h2>
             </div>
-            <ul class="grid grid-cols-3 gap-x-2">
+            <ul class="grid grid-cols-1 sm:grid-cols-3 gap-x-2">
                 <li
                     v-if="allNews"
                     v-for="news in allNews"
                     class="border-b border-neutral-600 hover:bg-neutral-500"
                 >
-                    <a class="text-lg font-bold px-6 py-3 flex flex-row items-center" href="#">{{ news.title }}</a>
+                    <a class="text-lg font-bold sm:px-6 py-3 flex flex-row items-center" href="#">{{ news.title }}</a>
                 </li>
             </ul>
         </section>
