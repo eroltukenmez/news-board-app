@@ -2,6 +2,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import {usePage} from "@inertiajs/vue3";
 import {ref} from "vue";
+import Header from "@/Layouts/Sections/Header.vue";
 
 const sources = usePage().props.news_sources
 
@@ -15,118 +16,9 @@ const isUserMenuOpen = ref<boolean>(false)
 <template>
     <div class="bg-gray-50 text-black/50 dark:bg-neutral-700 dark:text-white/50">
         <div class="container mx-auto">
-            <nav
-                class="flex-no-wrap relative flex w-full items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:flex-wrap lg:justify-start lg:py-4 shadow-xl rounded-b-xl">
-                <div class="flex w-full flex-wrap items-center justify-between px-3">
-                    <!-- Hamburger button for mobile view -->
-                    <button
-                        class="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
-                        type="button"
-                        aria-label="Toggle navigation"
-                    >
-                        <!-- Hamburger icon -->
-                        <span
-                            class="[&>svg]:w-7 [&>svg]:stroke-black/50 dark:[&>svg]:stroke-neutral-200">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-                                    clip-rule="evenodd"/>
-                            </svg>
-                        </span>
-                    </button>
+            <Header />
 
-                    <!-- Collapsible navigation container -->
-                    <div
-                        class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
-                    >
-                        <!-- Logo -->
-                        <a
-                            class="mb-4 me-5 ms-2 mt-3 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0"
-                            href="#">
-                            <ApplicationLogo class="block h-6 w-auto fill-current" />
-                        </a>
-                        <!-- Left navigation links -->
-                        <ul
-                            class="list-style-none me-auto flex flex-col ps-0 lg:flex-row"
-                        >
-                            <li class="mb-4 lg:mb-0 lg:pe-2" v-for="nav in navigations">
-                                <a
-                                    class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
-                                    :href="nav.href"
-                                >{{ nav.title }}</a>
-                            </li>
-                            <li class="mb-4 lg:mb-0 lg:pe-2" v-for="(title,source) in sources">
-                                <a
-                                    class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
-                                    :href="route('news.sources',source)"
-                                >{{ title }}</a>
-                            </li>
-                        </ul>
-                        <!-- Left links -->
-                    </div>
-
-                    <!-- Right elements -->
-                    <div class="relative flex items-center">
-                        <!-- dropdown container -->
-                        <div
-                            class="relative"
-                        >
-                            <Teleport to="body">
-                                <div class="absolute inset-0 z-50" v-if="isUserMenuOpen" @click="isUserMenuOpen = false"></div>
-                            </Teleport>
-                            <!-- dropdown trigger -->
-                            <a
-                                class="flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-                                href="#"
-                                role="button"
-                                @click="isUserMenuOpen = !isUserMenuOpen"
-                                aria-expanded="false">
-                                <!-- User avatar -->
-                                <img
-                                    src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
-                                    class="rounded-full"
-                                    style="height: 25px; width: 25px"
-                                    alt=""
-                                    loading="lazy"/>
-                            </a>
-                            <!-- Second dropdown menu -->
-                            <ul
-                                class="absolute z-[1000] float-left m-0 min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg data-[twe-dropdown-show]:block dark:bg-surface-dark"
-                                :class="[isUserMenuOpen ? '' : 'hidden']"
-                            >
-                                <!-- Second dropdown menu items -->
-                                <li>
-                                    <a
-                                        class="block w-full whitespace-nowrap bg-white px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
-                                        href="#"
-                                    >Action</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="block w-full whitespace-nowrap bg-white px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
-                                        href="#"
-                                    >Another action</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="block w-full whitespace-nowrap bg-white px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
-                                        href="#"
-                                    >Something else here</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Right elements -->
-                </div>
-            </nav>
-            <main class="mt-2 mx-2">
+            <main class="mt-5 mx-2">
                 <slot/>
             </main>
 
