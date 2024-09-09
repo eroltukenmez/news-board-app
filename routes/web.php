@@ -9,7 +9,7 @@ use Inertia\Inertia;
 Route::get('/', HomepageController::class)->name('homepage');
 
 Route::get("/all",[NewsController::class,'all'])->name('news.all');
-Route::get("/{source}",[NewsController::class,'sources'])->name('news.sources');
+Route::get("/source/{source}",[NewsController::class,'sources'])->name('news.sources');
 Route::get("/category/{category}",[NewsController::class,'category'])->name('news.category');
 
 Route::get('/dashboard', function () {
