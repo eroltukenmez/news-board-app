@@ -1,16 +1,6 @@
 <script setup lang="ts">
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import {usePage} from "@inertiajs/vue3";
-import {ref} from "vue";
 import Header from "@/Layouts/Sections/Header.vue";
 
-const sources = usePage().props.news_sources
-
-const navigations = ref<{title:string,href:string}[]>([
-    { title: 'Home', href:route('homepage') },
-])
-
-const isUserMenuOpen = ref<boolean>(false)
 </script>
 
 <template>

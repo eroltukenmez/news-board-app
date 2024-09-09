@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import {Link, usePage} from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+
+
+const sources = usePage().props.news_sources
+const navigations = ref<{title:string,href:string}[]>([
+    { title: 'Home', href:route('homepage') },
+])
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -29,8 +33,11 @@ const showingNavigationDropdown = ref(false);
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex dark:text-white">
-                        <NavLink href="/" >
-                            Homepage
+                        <NavLink v-for="navigation in navigations" :href="navigation.href" >
+                            {{ navigation.title }}
+                        </NavLink>
+                        <NavLink v-for="(title,source) in sources" :href="route('news.sources',{source})">
+                            {{ title }}
                         </NavLink>
                     </div>
                 </div>
@@ -86,9 +93,9 @@ const showingNavigationDropdown = ref(false);
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path
                                 :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }"
+                                    hidden: showingNavigationDropdown,
+                                    'inline-flex': !showingNavigationDropdown,
+                                }"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
@@ -96,9 +103,9 @@ const showingNavigationDropdown = ref(false);
                             />
                             <path
                                 :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }"
+                                    hidden: !showingNavigationDropdown,
+                                    'inline-flex': showingNavigationDropdown,
+                                }"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
@@ -116,8 +123,11 @@ const showingNavigationDropdown = ref(false);
             class="sm:hidden"
         >
             <div class="pt-2 pb-3 space-y-1">
-                <ResponsiveNavLink href="/">
-                    Home
+                <ResponsiveNavLink :href="navigation.href" v-for="navigation in navigations">
+                    {{ navigation.title }}
+                </ResponsiveNavLink>
+                <ResponsiveNavLink v-for="(title,source) in sources" :href="route('news.sources',{source})">
+                    {{ title }}
                 </ResponsiveNavLink>
             </div>
 
