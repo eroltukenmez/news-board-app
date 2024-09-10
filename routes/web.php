@@ -15,9 +15,6 @@ Route::get("/source/{source}/data",[NewsController::class,'sourceNewsData'])->na
 Route::get("/category/{category}",[NewsController::class,'categoryNewsData'])->name('news.category');
 Route::get("/category/{category}/data",[NewsController::class,'categoryNewsData'])->name('news.category.data');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

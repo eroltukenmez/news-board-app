@@ -45,12 +45,12 @@ const showingNavigationDropdown = ref(false);
                 <div class="hidden sm:flex sm:items-center sm:ms-6" v-if="$page.props.auth.user">
                     <!-- Settings Dropdown -->
                     <div class="ms-3 relative">
-                        <Dropdown align="right" width="48">
+                        <Dropdown align="right" width="48" content-classes="py-1 bg-white dark:bg-neutral-400">
                             <template #trigger>
                                 <span class="inline-flex rounded-md">
                                     <button
                                         type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-100 bg-transparent hover:text-gray-700 hover:dark:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                     >
                                         {{ $page.props.auth.user.name }}
 
