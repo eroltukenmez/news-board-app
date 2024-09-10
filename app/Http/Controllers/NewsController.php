@@ -6,6 +6,7 @@ use App\Services\Factories\NewsSourceFactory;
 use App\Services\Models\NewsParams;
 use App\Services\NewsService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class NewsController extends Controller
 {
@@ -21,16 +22,28 @@ class NewsController extends Controller
 
     public function sources(string $source)
     {
+        $title = \Str::of($source)->replace('-', ' ')->title();
+
+        return Inertia::render('Sources',compact('source','title'));
+    }
+
+    public function sourceNewsData(string $source, Request $request)
+    {
         try {
             $source = NewsSourceFactory::getSourceByName($source);
         }catch (\Exception $exception){
             abort(404,$exception->getMessage());
         }
 
-        return $this->service->getNews([ $source ],new NewsParams());
+        $params = new NewsParams(
+            page: $request->input('page'),
+            pageSize: $request->input('pageSize')
+        );
+
+        return $this->service->getNews([ $source ],$params);
     }
 
-    public function category(string $category,Request $request)
+    public function categoryNewsData(string $category,Request $request)
     {
         $params = new NewsParams(
             sortBy: $request->input('sortBy'),

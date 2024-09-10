@@ -16,9 +16,11 @@ readonly class GuardianParams implements NewsParamsInterface
         $params = [
             'api-key' => config('services.guardian.key'),
             'show-fields' => 'bodyText,thumbnail',
-            'q'       => $this->params->search,
-            'orderBy' => $this->params->sortBy,
-            'section' => $this->params->category
+            'page'      => $this->params->page ?? 1,
+            'page-size' => $this->params->pageSize ?? 10,
+            'q'         => $this->params->search,
+            'orderBy'   => $this->params->sortBy,
+            'section'   => $this->params->category
         ];
 
         return collect($params)

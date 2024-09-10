@@ -9,8 +9,11 @@ use Inertia\Inertia;
 Route::get('/', HomepageController::class)->name('homepage');
 
 Route::get("/all",[NewsController::class,'all'])->name('news.all');
+
 Route::get("/source/{source}",[NewsController::class,'sources'])->name('news.sources');
-Route::get("/category/{category}",[NewsController::class,'category'])->name('news.category');
+Route::get("/source/{source}/data",[NewsController::class,'sourceNewsData'])->name('news.sources.data');
+Route::get("/category/{category}",[NewsController::class,'categoryNewsData'])->name('news.category');
+Route::get("/category/{category}/data",[NewsController::class,'categoryNewsData'])->name('news.category.data');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -17,11 +17,17 @@ readonly class NewsAPIParams implements NewsParamsInterface
      */
     public function applyParam(): array
     {
+        $sort = [
+            'newest'    => 'publishedAt',
+            'relevancy' => 'relevancy'
+        ];
+
         $params = [
             'apiKey' => config('services.news_api.key'),
-            'pageSize' => 10,
+            'pageSize' => $this->params->pageSize ?? 10,
+            'page' => $this->params->page ?? 1,
             'q' => '',
-            'sortBy' => $this->params->sortBy,
+            'sortBy' => $sort[$this->params->sortBy ?? 'newest'],
             'from' => $this->params->startDate,
             'to' => $this->params->endDate,
         ];

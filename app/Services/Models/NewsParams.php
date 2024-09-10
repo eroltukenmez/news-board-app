@@ -9,6 +9,8 @@ class NewsParams
         public ?string $sortBy = null,
         public ?string $startDate = null,
         public ?string $endDate = null,
-        public ?string $category = null
+        public ?string $category = null,
+        public ?int $page = null,
+        public ?int $pageSize = null,
     ) {}
 }

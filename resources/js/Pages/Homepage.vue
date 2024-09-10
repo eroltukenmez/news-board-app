@@ -27,7 +27,7 @@ const fetchData = () => {
 }
 
 const fetchWithCategory = (category:string) => {
-    axios.get(route('news.category', { category }))
+    axios.get(route('news.category.data', { category }))
         .then(response => {
             categoryNews.value[category] = response.data
         })
