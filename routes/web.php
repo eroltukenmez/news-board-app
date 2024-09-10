@@ -19,6 +19,7 @@ Route::get("/category/{category}/data",[NewsController::class,'categoryNewsData'
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile-feed', [ProfileController::class, 'updateFeed'])->name('profile.feed-update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

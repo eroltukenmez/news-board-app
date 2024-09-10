@@ -5,10 +5,12 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import { Head } from '@inertiajs/vue3';
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import UpdateFeedOptionsForm from "@/Pages/Profile/Partials/UpdateFeedOptionsForm.vue";
 
 defineProps<{
     mustVerifyEmail?: boolean;
     status?: string;
+    categories: { [key: string]: string; };
 }>();
 </script>
 
@@ -26,6 +28,12 @@ defineProps<{
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
+                        class="max-w-xl"
+                    />
+                </div>
+                <div class="p-4 sm:p-8 bg-white dark:bg-neutral-600 shadow sm:rounded-lg">
+                    <UpdateFeedOptionsForm
+                        :categories="categories"
                         class="max-w-xl"
                     />
                 </div>

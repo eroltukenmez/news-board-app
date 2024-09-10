@@ -3,6 +3,10 @@ export interface User {
     name: string;
     email: string;
     email_verified_at?: string;
+    feed: {
+        sources:string[],
+        categories:string[],
+    };
 }
 
 export interface News {
