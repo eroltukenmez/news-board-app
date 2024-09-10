@@ -9,6 +9,8 @@ use Inertia\Inertia;
 Route::get('/', HomepageController::class)->name('homepage');
 
 Route::get("/all",[NewsController::class,'all'])->name('news.all');
+Route::get("/my-feed",[NewsController::class,'myFeed'])->name('news.my-feed');
+Route::get("/my-feed/data",[NewsController::class,'myFeedData'])->name('news.my-feed-data');
 
 Route::get("/source/{source}",[NewsController::class,'sources'])->name('news.sources');
 Route::get("/source/{source}/data",[NewsController::class,'sourceNewsData'])->name('news.sources.data');

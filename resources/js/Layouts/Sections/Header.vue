@@ -11,6 +11,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 const sources = usePage().props.news_sources
 const navigations = ref<{title:string,href:string}[]>([
     { title: 'Home', href:route('homepage') },
+    { title: 'My Feed', href:route('news.my-feed') },
 ])
 
 const showingNavigationDropdown = ref(false);

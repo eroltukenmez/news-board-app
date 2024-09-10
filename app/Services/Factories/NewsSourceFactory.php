@@ -12,13 +12,26 @@ class NewsSourceFactory
     /**
      * @throws \Exception
      */
-    public static function getSourceByName(string $name)
+    public static function getSourceByName(string $name):string
     {
         $newsSources = \App::make('newsSources');
         if ( isset($newsSources[$name]) )
             return new $newsSources[$name];
 
         throw new \Exception('Source not found');
+    }
+
+
+    public static function getSourcesByNames(array $sourcesNames):array
+    {
+        $newsSources = \App::make('newsSources');
+
+        if (count($sourcesNames) == 0)
+            return array_values($newsSources);
+
+        return array_values(
+            array_filter($newsSources,fn($source) => in_array($source,$sourcesNames),ARRAY_FILTER_USE_KEY)
+        );
     }
 
     public static function getAllSource():array

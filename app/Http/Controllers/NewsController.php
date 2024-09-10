@@ -51,4 +51,24 @@ class NewsController extends Controller
         );
         return $this->service->getAllNewsWithParams($params);
     }
+
+    public function myFeed()
+    {
+        return Inertia::render('MyFeed');
+    }
+
+    public function myFeedData(Request $request)
+    {
+        $sources = $request->input('sources') ?
+            NewsSourceFactory::getSourcesByNames($request->input('sources')) :
+            NewsSourceFactory::getAllSource();
+
+        $params = new NewsParams(
+            category: $request->input('category'),
+            page: $request->input('page'),
+            pageSize: $request->input('pageSize')
+        );
+
+        return $this->service->getNews($sources ,$params);
+    }
 }
