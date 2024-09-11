@@ -11,7 +11,7 @@ storage/*
 !storage/framework/views
 
 # Exclude Laravel's environment file
-.env
+#.env
 
 # Exclude IDE and editor-specific files
 .vscode

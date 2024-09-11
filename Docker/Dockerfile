@@ -42,6 +42,8 @@ RUN composer install --prefer-dist --no-ansi --no-interaction --no-progress --op
     && npm audit fix \
     && npm run build
 
+RUN php artisan key:generate
+
 COPY Docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
