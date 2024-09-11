@@ -12,7 +12,7 @@ class NewsSourceFactory
     /**
      * @throws \Exception
      */
-    public static function getSourceByName(string $name):string
+    public static function getSourceByName(string $name)
     {
         $newsSources = \App::make('newsSources');
         if ( isset($newsSources[$name]) )

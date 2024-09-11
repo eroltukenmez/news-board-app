@@ -2,6 +2,7 @@ services:
     nginx:
         image: nginx:alpine
         container_name: news-board-nginx
+        restart: always
         ports:
             - "${APP_PORT:-8001}:80"
         volumes:
@@ -14,20 +15,25 @@ services:
 
     php:
         build:
+            args:
+                user: "newsappuser"
+                uid: 1000
             context: .
             dockerfile: Docker/Dockerfile
         container_name: news-board-php
-        #environment:
-            #USER: ${DOCKER_USER:-test}
-            #GROUP: ${DOCKER_UID:-1000}
+        restart: always
+        entrypoint: ['/usr/local/bin/entrypoint.sh']
         volumes:
             - .:/var/www
+        depends_on:
+            - db
         networks:
             - news-network
 
     db:
         image: postgres:latest
         container_name: news-board-postgres
+        restart: always
         environment:
             POSTGRES_USER: ${DB_USERNAME:-news_app}
             POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
@@ -43,8 +49,6 @@ services:
         restart: always
         environment:
             REDIS_PASSWORD: ${REDIS_PASSWORD}
-        ports:
-            - "6379:6379"
         command: redis-server --save 20 1 --loglevel warning
         volumes:
             - cache:/data

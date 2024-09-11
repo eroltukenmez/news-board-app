@@ -8,7 +8,12 @@ import UpdateFeedOptionsForm from "@/Pages/Profile/Partials/UpdateFeedOptionsFor
 import NavLink from "@/Components/NavLink.vue";
 
 const categoryNews = ref<Record<string, News[]>>({})
-const feed = usePage().props.auth.user.feed
+const feed = usePage().props.auth.user.feed ?
+    usePage().props.auth.user.feed :
+    {
+        sources:[],
+        categories:[]
+    }
 
 const fetchWithCategory = (category:string) => {
     axios.get(route('news.my-feed-data', {

@@ -21,7 +21,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd news-board-app
 ```
 
 Create your .env file
@@ -48,3 +48,13 @@ Run the seerver
 ```bash
   docker compose up -d
 ```
+
+### Docker Port Configuration
+
+By default, Docker will start Nginx on port `8001`. You can customize this by setting the `APP_PORT` variable in your `.env` file.
+
+For example, you can add the following line to your `.env` file: 
+```
+APP_PORT=8080
+```
+This will configure Nginx to listen on port `8080` instead of the default `8001`.
