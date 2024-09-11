@@ -8,6 +8,7 @@ services:
         volumes:
             - ./Docker/nginx/conf.d:/etc/nginx/conf.d
             - .:/var/www
+            - news-app:/var/www
         depends_on:
             - php
         networks:
@@ -25,6 +26,8 @@ services:
         entrypoint: ['/usr/local/bin/entrypoint.sh']
         volumes:
             - .:/var/www
+            - .env:/var/www/.env
+            - news-app:/var/www
         depends_on:
             - db
         networks:
@@ -60,5 +63,6 @@ networks:
         driver: bridge
 
 volumes:
+    news-app:
     news-postgres-data:
     cache:
