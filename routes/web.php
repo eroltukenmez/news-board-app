@@ -9,8 +9,6 @@ use Inertia\Inertia;
 Route::get('/', HomepageController::class)->name('homepage');
 
 Route::get("/all",[NewsController::class,'all'])->name('news.all');
-Route::get("/my-feed",[NewsController::class,'myFeed'])->name('news.my-feed');
-Route::get("/my-feed/data",[NewsController::class,'myFeedData'])->name('news.my-feed-data');
 
 Route::get("/source/{source}",[NewsController::class,'sources'])->name('news.sources');
 Route::get("/source/{source}/data",[NewsController::class,'sourceNewsData'])->name('news.sources.data');
@@ -23,6 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile-feed', [ProfileController::class, 'updateFeed'])->name('profile.feed-update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::get("/my-feed",[NewsController::class,'myFeed'])->name('news.my-feed');
+    Route::get("/my-feed/data",[NewsController::class,'myFeedData'])->name('news.my-feed-data');
 });
 
 require __DIR__.'/auth.php';
